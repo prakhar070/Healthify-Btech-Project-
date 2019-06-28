@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Upload Page{% endblock %}
+{% block content %}
+	<form method="post" enctype="multipart/form-data" action="{{posturl}}">
+		{% csrf_token %}
+		{{uploadform.as_p}}
+		<button type="submit">Upload</button>
+	</form>
+	{% if result == '0' %}
+		<p>uninfected</p>
+	{% elif result == '1' %}
+		<p>infected</p>
+		<p>Click <a href="{% url 'centres' %}">here</a> to know the healthcare centres near your location</p>
+	{% endif %}
+{% endblock %}
