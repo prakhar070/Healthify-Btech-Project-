@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Image
 from . forms import ImageUploadForm, UserRegistrationForm
+from services import reversegeocode
 # Create your views here.
 
 class IndexView(TemplateView):
@@ -15,12 +16,26 @@ class IndexView(TemplateView):
 		ctx['posturl'] = reverse('save')			
 		return ctx
 
+
+
 class CentresView(LoginRequiredMixin, TemplateView):
 	template_name = 'main/centres.html'
 
 	def get_context_data(self, **kwargs):
 		ctx = super().get_context_data(**kwargs)
 		return ctx
+
+	def get(self, request, *args, **kwargs):
+		context = self.get_context_data()
+		data = self.request.GET
+		if not data:
+			context['var'] = True
+		else:
+			context['address'] = reversegeocode.getAddress(data.get('lat'),data.get('long'))
+			print("address is {}".format(context['address']))
+		return super().render_to_response(context)
+
+
 
 class SaveImageView(CreateView):
 	form_class = ImageUploadForm

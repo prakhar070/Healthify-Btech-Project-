@@ -2,4 +2,40 @@
 {% block title %}Centres{% endblock %}
 {% block content %}
 	<p>List of nearby health centres</p>
+	<form method="get" id="form" action="{% url 'centres' %}">
+		<input type="hidden" id="lat" name="lat" value="lat">
+		<input type="hidden" id="long" name="long" value="long">
+	</form>
+	<form>
+		<input type="text" id="address" name="address" value=" ">
+		<button type="submit" >Find Centres</button>
+	</form>
+	{% if address %}
+		<script type="text/javascript">
+			document.getElementById("address").value = "{{address}}"
+		</script>
+	{% endif %}
+	{% if var %}
+	<script type="text/javascript">
+			if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                   	document.getElementById("lat").value = parseFloat(position.coords.latitude);
+                   	document.getElementById("long").value = parseFloat(position.coords.longitude);
+       				document.getElementById("form").submit();
+                });
+            } else {
+                console.error("Geolocation is not supported by this browser!");
+            }
+    </script>
+    {% endif %}
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
