@@ -22,4 +22,6 @@ urlpatterns = [
 
 	#views for registration
 	path('register/', views.register, name= "register"),
+	path('email/', views.email, name= "email"),
+
 ]

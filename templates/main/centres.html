@@ -6,7 +6,7 @@
 		<input type="hidden" id="lat" name="lat" value="lat">
 		<input type="hidden" id="long" name="long" value="long">
 	</form>
-	<form>
+	<form method="get" action="{% url 'centres' %}">
 		<input type="text" id="address" name="address" value=" ">
 		<button type="submit" >Find Centres</button>
 	</form>
@@ -14,6 +14,15 @@
 		<script type="text/javascript">
 			document.getElementById("address").value = "{{address}}"
 		</script>
+	{% endif %}
+	{% if results %}
+				{% for res in results %}
+   					{% for key, value in res.items %}
+      					<p>{{value}}</h2>
+   					{% endfor %}
+   					<hr>
+				{% endfor %}
+				<p>Click <a href="{% url 'email' %}">here</a> to get a mail </p>
 	{% endif %}
 	{% if var %}
 	<script type="text/javascript">

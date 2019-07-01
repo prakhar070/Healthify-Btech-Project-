@@ -3,8 +3,14 @@ from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Image
 from . forms import ImageUploadForm, UserRegistrationForm
-from services import reversegeocode
+from services import reversegeocode, geocode, centres, createpdf
+from django.core.mail import send_mail
+from django.core.mail.message import EmailMessage
+from django.conf import settings
+import os
 # Create your views here.
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class IndexView(TemplateView):
 	template_name = 'main/index.html'
@@ -31,8 +37,20 @@ class CentresView(LoginRequiredMixin, TemplateView):
 		if not data:
 			context['var'] = True
 		else:
-			context['address'] = reversegeocode.getAddress(data.get('lat'),data.get('long'))
-			print("address is {}".format(context['address']))
+			if data.get('address'):
+				context['address'] = data.get('address')
+				latlng = geocode.getCoords(context['address'])
+				res = centres.getNearbyHospitals(latlng)
+				context['results'] = res
+				file_path = BASE_DIR + "/media/pdf/centresList-user{}.pdf"
+				file_path = file_path.format(self.request.user.first_name)
+				createpdf.createPDF(res, file_path)
+			else:
+				latlng = {'lat':data.get('lat'),'lng':data.get('long')}
+				context['address'] = reversegeocode.getAddress(data.get('lat'),data.get('long'))
+				
+				# if the user clicked the submit button
+		#print("contexxxxxxxxxxxxxxxt of centres is {}".format(context['results']))
 		return super().render_to_response(context)
 
 
@@ -50,6 +68,7 @@ class SaveImageView(CreateView):
 	def render_to_response(self, context=None, **response_kwargs):
 		return redirect(to = reverse('index'))
 
+
 # view to handle user registration
 def register(request):
 	if request.method == "POST":
@@ -63,6 +82,25 @@ def register(request):
 	else:
 		user_form = UserRegistrationForm()
 	return render(request, "account/register.html", {'user_form':user_form})
+
+
+# a view to send email
+def email(request):
+	if request.user.is_authenticated:
+		email = EmailMessage()	
+		email.subject = "Healtify - List of nearby health centres from your place"
+		email.body = "check the pdf file attached with this mail"
+		email.from_email = "bansalprakhar.2266@gmail.com"
+		email.to = [ "{}".format(request.user.email), ] 
+		file_path = BASE_DIR + "/media/pdf/centresList-user{}.pdf"
+		file_path = file_path.format(request.user.first_name)
+		#print("file path here is {}".format(file_path))
+		email.attach_file(file_path) # Attach a file directly
+		email.send() 
+		return redirect(to=reverse('index'))
+	else:
+		return redirect(to= reverse('login'))
+
 
 
 
