@@ -149,4 +149,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'bansalprakhar.2266@gmail.com'
-EMAIL_HOST_PASSWORD = 'GMAILsnppp'
+EMAIL_HOST_PASSWORD = '*********'
