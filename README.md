@@ -19,7 +19,7 @@
 
 <h2>Demo Screenshots </h2>
 <li> Point 1 </li>
-<p><img src="indexpage.png"/></p>
+<p><img src="indexPage.png"/ height="500px"></p>
 <li> Point 2 </li>
 <p><img src="uploadForm.png"/></p>
 <li> Point 3 </li>
