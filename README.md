@@ -12,6 +12,10 @@
     <ul>keras, Scikitlearn, numpy, pandas, opencv etc.</ul>
   <li> Web Technologies</li>
     <ul>Django, HTML, CSS </ul>
-    
-</p><h2>WorkFlow</h2>
+</p>
+
+<h2>WorkFlow</h2>
 <p><img src="worflowdiagram.jpg"/></p>
+
+<h2>Demo Screenshots </h2>
+
