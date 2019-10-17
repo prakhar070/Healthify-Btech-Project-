@@ -15,4 +15,4 @@ has a more complete output in form of a basic yet powerful web application that 
    </li><ul>Django, HTML, CSS </ul>
    
 <h2> WorkFlow </h2>
-![](workflowdiagram.jpg)
+![](./workflowdiagram.jpg)
