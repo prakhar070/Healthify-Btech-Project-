@@ -18,4 +18,12 @@
 <p><img src="worflowdiagram.jpg"/></p>
 
 <h2>Demo Screenshots </h2>
+<li> Point 1 </li>
+<p><img src="indexpage.png"/></p>
+<li> Point 2 </li>
+<p><img src="uploadForm.png"/></p>
+<li> Point 3 </li>
+<p><img src="centresDisplay.png"/></p>
+<li> Point 4 </li>
+<p><img src="mailReceived.jpg"/></p>
 
