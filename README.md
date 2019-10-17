@@ -19,11 +19,11 @@
 
 <h2>Demo Screenshots </h2>
 <li> Point 1 </li>
-<p><img src="indexPage.png"/ height="500px"></p>
+<p><img src="indexPage.png"/ height=300px width=500px></p>
 <li> Point 2 </li>
-<p><img src="uploadForm.png"/></p>
+<p><img src="uploadForm.png"/ height=300px width=500px></p>
 <li> Point 3 </li>
-<p><img src="centresDisplay.png"/></p>
+<p><img src="centresDisplay.png"/ height=300px width=500px></p>
 <li> Point 4 </li>
-<p><img src="mailReceived.jpg"/></p>
+<p><img src="mailReceived.JPG"/ height=300px width=500px></p>
 
